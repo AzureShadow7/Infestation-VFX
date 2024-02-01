@@ -517,6 +517,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Infestation: {fileID: 3092753903770123682, guid: 5d05a3bd72261544aba5b2787e2268d5,
     type: 3}
+  indicator: {fileID: 5931512454299226626, guid: 9550b02a4efb5ca4e9dc0dcbb03c83d5,
+    type: 3}
+  indicatorSpeed: 2
 --- !u!4 &612526039
 Transform:
   m_ObjectHideFlags: 0
