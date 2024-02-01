@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 public class SpellController : MonoBehaviour
 {
     public ParticleSystem Infestation;
     public GameObject indicator;
-
-    public float indicatorSpeed = 2.0f;
+    private Camera cam = null;
 
     Vector3 spawnPoint = new Vector3(0.0f, 0.0f, 0.0f);
 
@@ -17,11 +17,24 @@ public class SpellController : MonoBehaviour
     {
         var spellEmission = Infestation.emission;
         spellEmission.enabled = false;
+
+        cam = Camera.main;
     }
 
     void SpellPosition()
     {
-        Instantiate(indicator, spawnPoint, Quaternion.identity);
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            //create a ray from camera to mouse position
+            Ray spawnray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+            RaycastHit hit;
+
+            if(Physics.Raycast(spawnray, out hit))
+            {
+                Instantiate(indicator, hit.point, Quaternion.identity);
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -40,9 +53,6 @@ public class SpellController : MonoBehaviour
             //SpellPosition();
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            SpellPosition();
-        }
+        SpellPosition();
     }
 }
