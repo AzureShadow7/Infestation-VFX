@@ -26,3 +26,7 @@ Particle systems where used to spawn in the magic circle's components as a base 
 ![Screenshot 2024-01-16 142551](https://github.com/AzureShadow7/Infestation-VFX/assets/106389001/9cba98aa-7956-4a57-b2cb-a6ca7653950a)
 
 This is the effect at it's most basic level
+
+![Screenshot 2024-02-06 183324](https://github.com/AzureShadow7/Infestation-VFX/assets/106389001/53708291-274f-4575-bfe2-65a5c5ccd25e)
+
+The effect after more properties were implemented into it.
