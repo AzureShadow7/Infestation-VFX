@@ -54,7 +54,6 @@ public class SpellController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L) && isSpellCast == true)
         {
-            Debug.Log("BOING");
             //create a ray from camera to mouse position
             Ray spawnray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit;
@@ -67,15 +66,16 @@ public class SpellController : MonoBehaviour
                 infestationClone.Play();
                 Debug.Log("it's playing");
                 isSpellCast = true;
-            }
 
-            if (!infestationClone.isEmitting)
-            {
-                Debug.Log("Stopped");
-                Destroy(infestationClone);
-                //isSpellCast = false;
 
-                //CastingSpell(false);
+                //if (Infestation.isStopped)
+                //{
+                //    Debug.Log("Stopped");
+
+                //    isSpellCast = false;
+
+                //    CastingSpell(false);
+                //}
             }
         }
     }
