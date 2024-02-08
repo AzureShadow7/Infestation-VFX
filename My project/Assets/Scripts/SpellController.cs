@@ -8,22 +8,20 @@ public class SpellController : MonoBehaviour
     public ParticleSystem Infestation;
     public GameObject indicator;
     GameObject indicatorClone;
-    ParticleSystem infestationClone;
+    //ParticleSystem infestationClone;
     private Camera cam = null;
 
-    Vector3 spawnPoint = new Vector3(0.0f, 0.0f, 0.0f);
 
     public bool isSpellCast;
 
     // Start is called before the first frame update
     void Start()
     {
-        var spellEmission = Infestation.emission;
-        spellEmission.enabled = false;
+        //var spellEmission = Infestation.emission;
+        Infestation.enableEmission = false;
 
         cam = Camera.main;
 
-        indicator.SetActive(true);
 
         isSpellCast = false;
     }
@@ -37,7 +35,7 @@ public class SpellController : MonoBehaviour
         }
         else
         {
-            DestroyImmediate(indicatorClone, true);
+            Destroy(indicatorClone);
             return false;
         }
     }
@@ -49,7 +47,7 @@ public class SpellController : MonoBehaviour
             CastingSpell(true);
             isSpellCast = true;
 
-            var spellEmission = Infestation.emission;
+            //var spellEmission = Infestation.emission;
         }
 
         if (Input.GetKeyDown(KeyCode.L) && isSpellCast == true)
@@ -62,16 +60,23 @@ public class SpellController : MonoBehaviour
             if (Physics.Raycast(spawnray, out hit))
             {
                 //spawn object at the mouse position taking the y-axis/height of the object into account
-                infestationClone = Instantiate(Infestation, new Vector3(hit.point.x, 0.0f, hit.point.z), Quaternion.identity);
-                infestationClone.Play();
+                Instantiate(Infestation, new Vector3(hit.point.x, 0.0f, hit.point.z), Quaternion.identity);
+                Infestation.Play();
+                Infestation.enableEmission = true;
                 Debug.Log("it's playing");
                 isSpellCast = true;
 
 
-                //if (Infestation.isStopped)
+                //if (infestationClone.isStopped)
                 //{
                 //    Debug.Log("Stopped");
+                //    infestationClone.Stop();
+                //    infestationClone.Clear();
 
+
+
+
+                //    //Forget this for now
                 //    isSpellCast = false;
 
                 //    CastingSpell(false);
@@ -84,5 +89,18 @@ public class SpellController : MonoBehaviour
     void Update()
     {
         SpellPosition();
+
+        if (Infestation.isStopped)
+        {
+            Debug.Log("Stopped");
+            Infestation.Stop();
+            Infestation.Clear();
+            Infestation.enableEmission = false;
+
+            //Forget this for now
+            //isSpellCast = false;
+
+            //CastingSpell(false);
+        }
     }
 }
